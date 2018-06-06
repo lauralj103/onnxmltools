@@ -34,7 +34,8 @@ install:
   - printenv
   - conda config --set always_yes yes --set changeps1 no
   - conda install -c conda-forge protobuf numpy cmake openmpi
-  - conda install -c caffe2 caffe2
+  - git clone --recursive https://github.com/pytorch/pytorch.git
+  - cd pytorch && ./scripts/build_anaconda.sh --install-locally
   - cd $TRAVIS_BUILD_DIR && pip install -r requirements-dev.txt
   - cd $TRAVIS_BUILD_DIR && pip install -I git+https://github.com/onnx/onnx@rel-$ONNX_VERSION
   - cd $TRAVIS_BUILD_DIR && export PYTHONPATH=pwd
