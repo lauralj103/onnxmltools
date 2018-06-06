@@ -36,7 +36,7 @@ install:
   - conda install -c conda-forge protobuf numpy cmake openmpi
   - conda install -c caffe2 caffe2
   - cd $TRAVIS_BUILD_DIR && pip install -r requirements-dev.txt
-  - cd $TRAVIS_BUILD_DIR && pip install -I https://github.com/onnx/onnx@rel-$ONNX_VERSION
+  - cd $TRAVIS_BUILD_DIR && pip install -I git+https://github.com/onnx/onnx@rel-$ONNX_VERSION
   - cd $TRAVIS_BUILD_DIR && export PYTHONPATH=pwd
 
 script:
