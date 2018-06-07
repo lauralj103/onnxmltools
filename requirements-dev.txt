@@ -2,8 +2,8 @@ numpy
 protobuf
 codecov
 tensorflow
-keras
-coremltools==0.8
+keras==2.1.6
+coremltools
 pandas
 pytest
 pytest-cov
