@@ -1,8 +1,8 @@
 dist: trusty
 language: python
 env:
-  - ONNX_VERSION="1.1.2" ONNX_ML=1
-  - ONNX_VERSION="1.2.1" ONNX_ML=1
+  - ONNX_VERSION="==1.1.2" ONNX_ML=1
+  - ONNX_VERSION="" ONNX_ML=1
 
 addons:
   apt:
@@ -25,17 +25,20 @@ install:
       PYTHON_VER="3.6m";
     fi
   - cd $HOME && bash miniconda.sh -b -p $HOME/miniconda
-  - printenv
   - export PATH="$HOME/miniconda/bin:$PATH"
+  - export LD_LIBRARY_PATH="$HOME/miniconda/lib:$LD_LIBRARY_PATH"
+  - export LIBRARY_PATH="$HOME/miniconda/lib:$LIBRARY_PATH"
+  - export CPATH="$HOME/miniconda/include:$CPATH"
+  - export CPATH="$HOME/miniconda/include/python$PYTHON_VER:$CPATH"
+  - ls $HOME/miniconda/include/python$PYTHON_VER
+  - printenv
   - conda config --set always_yes yes --set changeps1 no
-  - conda install conda-build
+  - conda install -c caffe2 caffe2-gcc4.8
+  - conda install -c conda-forge protobuf
+  - conda install -c conda-forge numpy
   - conda install -c conda-forge cmake
-  - git clone --recursive https://github.com/pytorch/pytorch.git
-  - cd pytorch && ./scripts/build_anaconda.sh --install-locally -DUSE_MPI=OFF
   - cd $TRAVIS_BUILD_DIR && pip install -r requirements-dev.txt
-  - conda install -c conda-forge numpy protobuf 
-  - set CONDA_PREFIX=$HOME/miniconda
-  - cd $TRAVIS_BUILD_DIR && pip install git+https://github.com/onnx/onnx@rel-$ONNX_VERSION
+  - cd $TRAVIS_BUILD_DIR && pip install -I "onnx$ONNX_VERSION"
   - cd $TRAVIS_BUILD_DIR && export PYTHONPATH=pwd
 
 script:
