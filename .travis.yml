@@ -25,19 +25,14 @@ install:
       PYTHON_VER="3.6m";
     fi
   - cd $HOME && bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - export LD_LIBRARY_PATH="$HOME/miniconda/lib:$LD_LIBRARY_PATH"
-  - export LIBRARY_PATH="$HOME/miniconda/lib:$LIBRARY_PATH"
-  - export CPATH="$HOME/miniconda/include:$CPATH"
-  - export CPATH="$HOME/miniconda/include/python$PYTHON_VER:$CPATH"
-  - ls $HOME/miniconda/include/python$PYTHON_VER
   - printenv
   - conda config --set always_yes yes --set changeps1 no
-  - conda install -c conda-forge protobuf numpy cmake openmpi
   - conda install conda-build
+  - conda install -c conda-forge cmake
   - git clone --recursive https://github.com/pytorch/pytorch.git
   - cd pytorch && ./scripts/build_anaconda.sh --install-locally -DUSE_MPI=OFF
   - cd $TRAVIS_BUILD_DIR && pip install -r requirements-dev.txt
+  - conda install -c conda-forge protobuf numpy cmake
   - cd $TRAVIS_BUILD_DIR && pip install -I git+https://github.com/onnx/onnx@rel-$ONNX_VERSION
   - cd $TRAVIS_BUILD_DIR && export PYTHONPATH=pwd
 
