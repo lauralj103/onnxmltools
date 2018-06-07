@@ -3,7 +3,7 @@ protobuf
 codecov
 tensorflow
 keras
-coremltools
+coremltools==0.8
 pandas
 pytest
 pytest-cov
