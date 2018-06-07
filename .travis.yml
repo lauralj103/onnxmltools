@@ -29,11 +29,11 @@ install:
   - export PATH="$HOME/miniconda/bin:$PATH"
   - conda config --set always_yes yes --set changeps1 no
   - conda install conda-build
-  - conda install -c conda-forge cmake protobuf 
+  - conda install -c conda-forge cmake
   - git clone --recursive https://github.com/pytorch/pytorch.git
   - cd pytorch && ./scripts/build_anaconda.sh --install-locally -DUSE_MPI=OFF
   - cd $TRAVIS_BUILD_DIR && pip install -r requirements-dev.txt
-  - conda install -c conda-forge numpy
+  - conda install -c conda-forge numpy protobuf 
   - set CONDA_PREFIX=$HOME/miniconda
   - cd $TRAVIS_BUILD_DIR && pip install git+https://github.com/onnx/onnx@rel-$ONNX_VERSION
   - cd $TRAVIS_BUILD_DIR && export PYTHONPATH=pwd
