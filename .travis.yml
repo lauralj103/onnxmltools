@@ -34,6 +34,7 @@ install:
   - cd pytorch && ./scripts/build_anaconda.sh --install-locally -DUSE_MPI=OFF
   - cd $TRAVIS_BUILD_DIR && pip install -r requirements-dev.txt
   - conda install -c conda-forge numpy
+  - set CONDA_PREFIX=$HOME/miniconda
   - cd $TRAVIS_BUILD_DIR && pip install git+https://github.com/onnx/onnx@rel-$ONNX_VERSION
   - cd $TRAVIS_BUILD_DIR && export PYTHONPATH=pwd
 
